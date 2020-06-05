@@ -1,8 +1,13 @@
 package com.mind.entity;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("Calculator test class")
@@ -19,7 +24,9 @@ public class CalculatorTest { //It can be package-private
     }
 
     @BeforeEach
-    public void setUp() { System.out.println("Set up"); }
+    public void setUp() {
+        System.out.println("Set up");
+    }
 
     @AfterEach
     public void tearDown() {
@@ -38,10 +45,41 @@ public class CalculatorTest { //It can be package-private
     @DisplayName("Test two sum operations / assertAll")
     public void testTwoSumOperations() {
         Calculator calculator = new Calculator();
-        Integer result = calculator.add(2, 2);
 
         assertAll("Test failed",
-                () -> assertEquals(calculator.add(2,2), 4),
-                () -> assertEquals(calculator.add(3,3), 6));
+                () -> assertEquals(calculator.add(2, 2), 4),
+                () -> assertEquals(calculator.add(3, 3), 6));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1,2", "2,1"})
+    @DisplayName("Test two sum operations / ParameterizedTest/CvsSource")
+    public void testTwoSumOperationsWithParameterizedTest(int firstOperator, int secondOperator) {
+        Calculator calculator = new Calculator();
+        Integer result = calculator.add(firstOperator, secondOperator);
+
+        assertAll("Test failed",
+                () -> assertEquals(result, 3));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3, 4})
+    @DisplayName("Test add value / ParameterizedTest/Value")
+    public void testTwoSumOperationsWithParameterizedTest2(int value) {
+        Calculator calculator = new Calculator();
+        calculator.addValue(value);
+
+        assertAll("Test failed",
+                () -> assertEquals(calculator.getValue(), value));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, -2, -3, -4})
+    @DisplayName("Test add negative number exception / ParameterizedTest/Exception")
+    public void testTwoSumOperationsWithException(int value) {
+        Calculator calculator = new Calculator();
+
+        assertThatExceptionOfType(NegativeNumberException.class)
+                .isThrownBy(() -> calculator.addValue(value));
     }
 }

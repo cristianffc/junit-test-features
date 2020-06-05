@@ -2,8 +2,24 @@ package com.mind.entity;
 
 public class Calculator {
 
-    public Integer add(Integer fisrtOperator, Integer secondOperator) {
-        return fisrtOperator + secondOperator;
+    Integer value;
+
+    public Integer add(Integer firstOperator, Integer secondOperator) {
+        return firstOperator + secondOperator;
     }
 
+    public Integer addValue(Integer value) {
+        if(value < 0) {
+            throw new NegativeNumberException();
+        }
+        return this.value = value;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
 }
