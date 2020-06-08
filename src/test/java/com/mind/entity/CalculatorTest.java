@@ -5,6 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -65,7 +66,7 @@ public class CalculatorTest { //It can be package-private
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4})
     @DisplayName("Test add value / ParameterizedTest/Value")
-    public void testTwoSumOperationsWithParameterizedTest2(int value) {
+    public void testAddValueWithParameterizedTest2(int value) {
         Calculator calculator = new Calculator();
         calculator.addValue(value);
 
@@ -76,10 +77,23 @@ public class CalculatorTest { //It can be package-private
     @ParameterizedTest
     @ValueSource(ints = {-1, -2, -3, -4})
     @DisplayName("Test add negative number exception / ParameterizedTest/Exception")
-    public void testTwoSumOperationsWithException(int value) {
+    public void testAddValueOperationWithException(int value) {
         Calculator calculator = new Calculator();
 
         assertThatExceptionOfType(NegativeNumberException.class)
                 .isThrownBy(() -> calculator.addValue(value));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1,2", "3,1"})
+    @DisplayName("Should sum two values")
+    public void shouldSumTwoValues(int firstOperator, int secondOperator) {
+        Calculator calculator = new Calculator();
+
+        assertThat(calculator.add(firstOperator, secondOperator))
+                .isEqualTo(firstOperator + secondOperator);
+
+        assertThat(calculator.add(firstOperator, secondOperator))
+                .isPositive();
     }
 }
