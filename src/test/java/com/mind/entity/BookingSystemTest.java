@@ -51,7 +51,7 @@ public class BookingSystemTest {
 
         bookingSystem.addReservation(reservation);
 
-        assertThat(bookingSystem.getReservationList()).isEqualTo(1);
+        assertThat(bookingSystem.getReservationList().size()).isEqualTo(1);
     }
 
 }
