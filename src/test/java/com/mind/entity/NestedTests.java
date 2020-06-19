@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class NestedTestsTest {
-    private static final String name = "Test";
+public class NestedTests {
+    private static final String name = "Hello";
 
     @Nested
-    @DisplayName("Nested annotation")
+    @DisplayName("Nested annotation test")
     class BuilderTest {
         @Test
-        void nameTest() {
-            assertEquals(name, "Test");
+        void nestedMethod() {
+            assertEquals(name, "Hello");
         }
     }
 }

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@DisplayName("Calculator test class")
+@DisplayName("Calculator SUT class")
 public class CalculatorTest { //It can be package-private
 
     @BeforeAll
@@ -35,29 +35,29 @@ public class CalculatorTest { //It can be package-private
     }
 
     @Test
-    @DisplayName("Add method test / assertEquals")
-    public void testSum() {
+    @DisplayName("assertEquals")
+    public void should_sumValues() {
         Calculator calculator = new Calculator();
-        Integer result = calculator.add(2, 2);
+        Integer result = calculator.sum(2, 2);
         assertEquals(4, result, 0);
     }
 
     @Test
-    @DisplayName("Test two sum operations / assertAll")
-    public void testTwoSumOperations() {
+    @DisplayName("assertAll")
+    public void should_sumValues2() {
         Calculator calculator = new Calculator();
 
         assertAll("Test failed",
-                () -> assertEquals(calculator.add(2, 2), 4),
-                () -> assertEquals(calculator.add(3, 3), 6));
+                () -> assertEquals(calculator.sum(2, 2), 4),
+                () -> assertEquals(calculator.sum(3, 3), 6));
     }
 
     @ParameterizedTest
     @CsvSource({"1,2", "2,1"})
-    @DisplayName("Test two sum operations / ParameterizedTest/CvsSource")
-    public void testTwoSumOperationsWithParameterizedTest(int firstOperator, int secondOperator) {
+    @DisplayName("ParameterizedTest - CvsSource")
+    public void should_sumValues3(int firstOperator, int secondOperator) {
         Calculator calculator = new Calculator();
-        Integer result = calculator.add(firstOperator, secondOperator);
+        Integer result = calculator.sum(firstOperator, secondOperator);
 
         assertAll("Test failed",
                 () -> assertEquals(result, 3));
@@ -65,8 +65,8 @@ public class CalculatorTest { //It can be package-private
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4})
-    @DisplayName("Test add value / ParameterizedTest/Value")
-    public void testAddValueWithParameterizedTest2(int value) {
+    @DisplayName("ParameterizedTest - ValueSource")
+    public void should_addValue(int value) {
         Calculator calculator = new Calculator();
         calculator.addValue(value);
 
@@ -76,8 +76,8 @@ public class CalculatorTest { //It can be package-private
 
     @ParameterizedTest
     @ValueSource(ints = {-1, -2, -3, -4})
-    @DisplayName("Test add negative number exception / ParameterizedTest/Exception")
-    public void testAddValueOperationWithException(int value) {
+    @DisplayName("ParameterizedTest - Exception")
+    public void should_throwException_when_addNegativeNumbers(int value) {
         Calculator calculator = new Calculator();
 
         assertThatExceptionOfType(NegativeNumberException.class)
@@ -86,14 +86,13 @@ public class CalculatorTest { //It can be package-private
 
     @ParameterizedTest
     @CsvSource({"1,2", "3,1"})
-    @DisplayName("Should sum two values")
-    public void shouldSumTwoValues(int firstOperator, int secondOperator) {
+    public void should_sumTwoValues(int firstOperator, int secondOperator) {
         Calculator calculator = new Calculator();
 
-        assertThat(calculator.add(firstOperator, secondOperator))
+        assertThat(calculator.sum(firstOperator, secondOperator))
                 .isEqualTo(firstOperator + secondOperator);
 
-        assertThat(calculator.add(firstOperator, secondOperator))
+        assertThat(calculator.sum(firstOperator, secondOperator))
                 .isPositive();
     }
 }

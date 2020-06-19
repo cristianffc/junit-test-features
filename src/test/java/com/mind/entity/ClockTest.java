@@ -10,21 +10,21 @@ import static org.junit.jupiter.api.Assertions.assertTimeout;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@DisplayName("Clock test class")
+@DisplayName("Clock SUT class")
 public class ClockTest {
 
     @Test
-    @DisplayName("Sleep method test / asserTimeout")
-    public void testSleep1() {
+    @DisplayName("asserTimeout")
+    public void should_triggerTimeout() {
         Clock clock = new Clock();
-        assertTimeout(Duration.ofMillis(1000), () -> clock.sleep(10000));
+        assertTimeout(Duration.ofMillis(1000), () -> clock.sleep(500));
     }
 
     @Test
-    @DisplayName("Sleep method test / assertTimeoutPreemptively")
-    public void testSleep2() {
+    @DisplayName("assertTimeoutPreemptively")
+    public void should_triggerTimeoutPreemptively() {
         Clock clock = new Clock();
-        assertTimeoutPreemptively(Duration.ofMillis(1000), () -> clock.sleep(10000));
+        assertTimeoutPreemptively(Duration.ofMillis(1000), () -> clock.sleep(500));
     }
 
 }

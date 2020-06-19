@@ -4,7 +4,7 @@ public class Calculator {
 
     Integer value;
 
-    public Integer add(Integer firstOperator, Integer secondOperator) {
+    public Integer sum(Integer firstOperator, Integer secondOperator) {
         return firstOperator + secondOperator;
     }
 
