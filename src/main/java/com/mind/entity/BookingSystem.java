@@ -6,6 +6,11 @@ import java.util.List;
 public class BookingSystem {
 
     List<Reservation> reservationList = new ArrayList<>();
+    MailServer mailServer;
+
+    public BookingSystem(MailServer mailServer) {
+        this.mailServer = mailServer;
+    }
 
     public List<Reservation> getReservationList() {
         return reservationList;
@@ -13,5 +18,9 @@ public class BookingSystem {
 
     public void addReservation(Reservation reservation) {
         reservationList.add(reservation);
+    }
+
+    public void confirmReservation(Reservation reservation) {
+        mailServer.sendEmail(reservation);
     }
 }
