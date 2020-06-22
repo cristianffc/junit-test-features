@@ -36,7 +36,7 @@ public class CalculatorTest { //It can be package-private
 
     @Test
     @DisplayName("assertEquals")
-    public void should_sumValues() {
+    public void shouldSumValues() {
         Calculator calculator = new Calculator();
         Integer result = calculator.sum(2, 2);
         assertEquals(4, result, 0);
@@ -44,7 +44,7 @@ public class CalculatorTest { //It can be package-private
 
     @Test
     @DisplayName("assertAll")
-    public void should_sumValues2() {
+    public void shouldSumValues2() {
         Calculator calculator = new Calculator();
 
         assertAll("Test failed",
@@ -55,7 +55,7 @@ public class CalculatorTest { //It can be package-private
     @ParameterizedTest
     @CsvSource({"1,2", "2,1"})
     @DisplayName("ParameterizedTest - CvsSource")
-    public void should_sumValues3(int firstOperator, int secondOperator) {
+    public void shouldSumValues3(int firstOperator, int secondOperator) {
         Calculator calculator = new Calculator();
         Integer result = calculator.sum(firstOperator, secondOperator);
 
@@ -66,7 +66,7 @@ public class CalculatorTest { //It can be package-private
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3, 4})
     @DisplayName("ParameterizedTest - ValueSource")
-    public void should_addValue(int value) {
+    public void shouldAddValue(int value) {
         Calculator calculator = new Calculator();
         calculator.addValue(value);
 
@@ -77,7 +77,7 @@ public class CalculatorTest { //It can be package-private
     @ParameterizedTest
     @ValueSource(ints = {-1, -2, -3, -4})
     @DisplayName("ParameterizedTest - Exception")
-    public void should_throwException_when_addNegativeNumbers(int value) {
+    public void shouldThrowException_WhenAddNegativeNumbers(int value) {
         Calculator calculator = new Calculator();
 
         assertThatExceptionOfType(NegativeNumberException.class)
@@ -86,7 +86,7 @@ public class CalculatorTest { //It can be package-private
 
     @ParameterizedTest
     @CsvSource({"1,2", "3,1"})
-    public void should_sumTwoValues(int firstOperator, int secondOperator) {
+    public void shouldSumTwoValues(int firstOperator, int secondOperator) {
         Calculator calculator = new Calculator();
 
         assertThat(calculator.sum(firstOperator, secondOperator))

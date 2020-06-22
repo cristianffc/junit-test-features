@@ -15,14 +15,14 @@ public class ClockTest {
 
     @Test
     @DisplayName("asserTimeout")
-    public void should_triggerTimeout() {
+    public void shouldTriggerTimeoutWhenTimeIsOver() {
         Clock clock = new Clock();
         assertTimeout(Duration.ofMillis(1000), () -> clock.sleep(500));
     }
 
     @Test
     @DisplayName("assertTimeoutPreemptively")
-    public void should_triggerTimeoutPreemptively() {
+    public void shouldTriggerTimeoutPreemptivelyWhenTimeIsOver() {
         Clock clock = new Clock();
         assertTimeoutPreemptively(Duration.ofMillis(1000), () -> clock.sleep(500));
     }

@@ -36,7 +36,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    public void should_returnListOfBookedHours() {
+    public void shouldReturnListOfBookedHours() {
         Reservation reservation = new Reservation.builder().withPersonName("Other Name")
                                                             .withNumberOfDays(3)
                                                             .build();
@@ -47,7 +47,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    public void should_addReservationToBookingSystem() {
+    public void shouldAddReservationToBookingSystem() {
         Reservation reservation = new Reservation.builder().withPersonName("Other Name")
                                                             .withNumberOfDays(3)
                                                             .build();
@@ -57,7 +57,7 @@ public class BookingSystemTest {
     }
 
     @Test
-    public void should_confirmReservation() {
+    public void shouldConfirmReservation() {
         Reservation reservation = new Reservation.builder().withPersonName("Other Name")
                                                            .withNumberOfDays(3)
                                                            .build();
