@@ -2,8 +2,16 @@ package com.mind.entity;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.runners.Parameterized;
+import org.mockito.Mockito;
+
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -32,6 +40,14 @@ public class CalculatorTest { //It can be package-private
     @AfterEach
     public void tearDown() {
         System.out.println("Tear down");
+    }
+
+    private static Stream<Arguments> values() {
+        return Stream.of(
+                Arguments.of(1),
+                Arguments.of(2),
+                Arguments.of(3)
+        );
     }
 
     @Test
@@ -85,6 +101,16 @@ public class CalculatorTest { //It can be package-private
     }
 
     @ParameterizedTest
+    @MethodSource("values")
+    public void shouldAddValue2(int value) {
+        Calculator calculator = new Calculator();
+        calculator.addValue(value);
+
+        assertAll("Test failed",
+                () -> assertEquals(calculator.getValue(), value));
+    }
+
+    @ParameterizedTest
     @CsvSource({"1,2", "3,1"})
     public void shouldSumTwoValues(int firstOperator, int secondOperator) {
         Calculator calculator = new Calculator();
@@ -95,4 +121,5 @@ public class CalculatorTest { //It can be package-private
         assertThat(calculator.sum(firstOperator, secondOperator))
                 .isPositive();
     }
+
 }
