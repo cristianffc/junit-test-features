@@ -6,9 +6,11 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.runners.Parameterized;
-import org.mockito.Mockito;
+import org.junit.platform.commons.util.ReflectionUtils;
 
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -120,6 +122,19 @@ public class CalculatorTest { //It can be package-private
 
         assertThat(calculator.sum(firstOperator, secondOperator))
                 .isPositive();
+    }
+
+    @Test
+    @DisplayName("Test private method")
+    public void shouldPrintValue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Calculator calculator = new Calculator();
+        calculator.addValue(3);
+
+        Method privateMethod = calculator.getClass().getDeclaredMethod("checkValue");
+
+        ReflectionUtils.makeAccessible(privateMethod);
+
+        assertThat((boolean) privateMethod.invoke(calculator)).isTrue();
     }
 
 }

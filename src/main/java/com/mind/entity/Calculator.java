@@ -22,4 +22,11 @@ public class Calculator {
     public void setValue(Integer value) {
         this.value = value;
     }
+
+    private boolean checkValue() {
+        if(value != null) {
+            return true;
+        }
+        return false;
+    }
 }
